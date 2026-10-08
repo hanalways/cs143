@@ -1,99 +1,135 @@
 package edu.hanalways.cs143.ArrayIntList;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
 public class ArrayIntListTest {
-    private ArrayIntList test;
-
-    @BeforeEach
-    void setup() {
-        test = new ArrayIntList();
+  @Test(expected = IllegalStateException.class)
+  public void testIllegalStateExceptionIsThrown() {
+    ArrayIntList tester = new ArrayIntList();
+    for (int x = 0; x < 21; x++) {
+        tester.add(x); // the capacity is default to 20 so this should throw an exception
     }
+  }
 
-    // junit4
-//    @Test(expected = IllegalStateException.class)
-//    public void testIllegalStateExceptionIsThrown() {
-//        ArrayIntList test = new ArrayIntList();
-//        for (int i = 0; i < 21; i++) {
-//            test.add(i);
-//        }
-//    }
+  @Test(expected = IndexOutOfBoundsException.class)
+  public void testIndexOutOfBoundsExceptionIsThrown() {
+    ArrayIntList tester = new ArrayIntList();
+    tester.get(1000);
+  }
 
-    // rewritten with junit6 and spent wayyyy too long adding gradle to this project because apparently i hate myself
-    @DisplayName("adding elements pass the array capacity throws an exception")
-    @Test
-    public void testAddingPastCapacityThrowsException() {
-        Exception e = assertThrows(IllegalStateException.class, () -> {
-            for (int i = 0; i < 21; i++) {
-                test.add(i);
-            }
-        });
+  @Test
+  public void testAddElementAtPosition() {
+    ArrayIntList tester = new ArrayIntList();
+    
+    // load up an array with 5 elements
+    tester.add(0);
+    tester.add(1);
+    tester.add(2);
+    tester.add(3);
+    tester.add(4);
+    tester.add(5);
+    
+    // insert into that array a new element at specific positions
+    tester.add(1, 100);
+    assertEquals("after adding elements the new postion 1 should be", 100, tester.get(1));
+    assertEquals("after adding elements the new postion 2 should be", 1, tester.get(2));
+    tester.add(1, 200);
+    assertEquals("after adding elements the new position 1 should be", 200, tester.get(1));
+    assertEquals("after adding elements the new position 2 should be", 100, tester.get(2));
+    assertEquals("after adding elements the new position 3 should be", 1, tester.get(3));
+  }
+  
+  @Test
+  public void testAddAndSize() {
+    ArrayIntList tester = new ArrayIntList();
+    tester.add(888);
+    tester.add(100);
+    tester.add(200);
+    tester.add(300);
+    tester.add(400);
+    tester.add(500);
+    tester.add(600);
+    assertEquals("after adding 7 elements the size should be", 7, tester.size());
+  }
 
-        String expectedMsg = "would exceed list capacity";
-        String actualMsg = e.getMessage();
-        assertTrue(actualMsg.contains(expectedMsg));
-    }
+  @Test
+  public void testRemoveElementAtPositionAndGet() {
+    ArrayIntList tester = new ArrayIntList();
+    tester.add(888);
+    tester.add(100);
+    tester.add(200);
+    tester.add(300);
+    tester.add(400);
+    tester.add(500);
+    int x = tester.get(3);
+    tester.remove(3);
+ //   assertEquals("after removing the 3rd element the 3rd element should be", 400, tester.get(3));
+    assertEquals("after remove value at index 3 no longer exist in array", -1, tester.indexOf(x));
 
-    // timebox blitz to rewrite tests in junit6
-    @DisplayName("adding elements at position shifts the rest of the elements correctly")
-    @Test
-    public void testAddElementAtPosition() throws Exception {
-        addElementsToArray(test, 5);
+   }
 
-        test.add(1, 100);
-        assertEquals(100, test.get(1), "after adding elements the new position 1 should be");
-        assertEquals(1, test.get(2), "after adding elements the new postion 2 should be");
-        test.add(1, 200);
-        assertEquals(200, test.get(1));
-        assertEquals(100, test.get(2));
-        assertEquals(1, test.get(3));
-    }
+  @Test
+  public void testIndexOf() {
+    ArrayIntList tester = new ArrayIntList();
+    tester.add(888);
+    tester.add(100);
+    tester.add(200);
+    tester.add(300);
+    tester.add(400);
+    tester.add(500);
+    tester.remove(3);
+    assertEquals("after index of 200 should be", 2, tester.indexOf(200));
+   }
+   
+  @Test
+  public void testToString() {
+    ArrayIntList tester = new ArrayIntList();
+    tester.add(888);
+    tester.add(100);
+    tester.add(200);
+    tester.add(300);
+    assertEquals("after toString shoule be", "[888, 100, 200, 300]", tester+"");
+   }
 
-    @DisplayName("adding elements should increase size correctly")
-    @Test
-    public void testAddAndSize() throws Exception {
-        addElementsToArray(test, 7);
-        assertEquals(7, test.size());
-    }
+ @Test
+  public void testEquals() {
+  
+    // check if two lists are equal
+    ArrayIntList testList1 = new ArrayIntList();
+    testList1.add(0);
+    testList1.add(100);
+    testList1.add(200);
+    testList1.add(300);
+    testList1.add(400);
+    testList1.add(500);
+    
+    ArrayIntList testList2 = new ArrayIntList();
+    testList2.add(0);
+    testList2.add(100);
+    testList2.add(200);
+    testList2.add(300);
+    testList2.add(400);
+    testList2.add(500);
 
-    @DisplayName("removing elements at index should not have element")
-    @Test
-    public void testRemoveElementAtPositionAndGet() throws Exception {
-        addElementsToArray(test, 6);
-        test.remove(3);
-        assertEquals(-1, test.indexOf(3));
-    }
+    assertEquals("list 1 should be eqaul to list 2", true, testList1.equals(testList2));
+    
+    // check if two lists are not equal
+    ArrayIntList testList3 = new ArrayIntList();
+    testList3.add(0);
+    testList3.add(100);
+    testList3.add(200);
+    testList3.add(305);
+    testList3.add(400);
+    testList3.add(500);
+    
+    assertEquals("list 1 should not be eqaul to list 3", false, testList1.equals(testList3));
+    
+    // check if two empty lists are equal
+    ArrayIntList testList4 = new ArrayIntList();
+    ArrayIntList testList5 = new ArrayIntList();
 
-    private void addElementsToArray(ArrayIntList test, int n) throws Exception {
-        for (int i = 0; i < n; i++) {
-            test.add(i);
-        }
-    }
+    assertEquals("empty list 4 should eqaul to empty list 5", true, testList4.equals(testList5)); 
+  }
 }
-
-// output:
-//hana@fuji cs143 % ./gradlew test
-//WARNING: A restricted method in java.lang.System has been called
-//WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/Users/hana/.gradle/wrapper/dists/gradle-9.6.0-bin/42k10rwplmzkhuboz9kdazi7s/gradle-9.6.0/lib/native-platform-0.22-milestone-29.jar)
-//        WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
-//        WARNING: Restricted methods will be blocked in a future release unless native access is enabled
-//
-//
-//        > Task :test
-//
-//        ArrayIntListTest > adding elements pass the array capacity throws an exception PASSED
-//
-//        ArrayIntListTest > removing elements at index should not have element PASSED
-//
-//        ArrayIntListTest > adding elements should increase size correctly PASSED
-//
-//        ArrayIntListTest > adding elements at position shifts the rest of the elements correctly PASSED
-//
-//        BUILD SUCCESSFUL in 516ms
-//        5 actionable tasks: 1 executed, 4 up-to-date
-//        Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.6.0/userguide/configuration_cache_enabling.html
-//        hana@fuji cs143 %
