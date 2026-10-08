@@ -87,6 +87,22 @@ public class ArrayIntList implements IntList {
         size--;
     }
 
+    // pre: there is an existing array to compare against
+    // post: returns a boolean to check if all elements in the given list present and in the same order
+    public boolean equals(ArrayIntList list) {
+        if (list.size() != this.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < list.size; i++) {
+            if (list.get(i) != this.get(i)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     // post: throws an IndexOutOfBoundsException if the given index is
     //       not a legal index of the current list
     private void checkIndex(int index) {
