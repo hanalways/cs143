@@ -1,6 +1,7 @@
 package edu.hanalways.cs143.Sequences;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 import java.io.FileNotFoundException;
@@ -15,6 +16,7 @@ public class PlainSequencesTest {
         try {
             tester.readSequences(fileName);
         } catch (FileNotFoundException e) {
+            System.out.println("e");
         }
 
         assertEquals("after reading file the number of sequences should be 1", 1, tester.getSequences().size());
@@ -41,11 +43,22 @@ public class PlainSequencesTest {
     }
 
     @Test
+    public void testIsValidSequence_returnsFalse() {
+        Sequences tester = new PlainSequences();
+
+        try {
+            tester.readSequences("boo");
+        } catch (Exception e) {}
+
+        assertFalse("an empty sequence should return false", tester.isValidSequence(0));
+    }
+
+    @Test
     public void formatInGroups() {
         Sequences tester = new PlainSequences();
         String fileName = "peptide_mRNA.text";
         String expected =
-                "ACAAGATGCC ATTGTCCCCC GGCCTCCTGC TGCTGCTGCT CTCCGGGGCC ACGGCCACCG \n" +
+                        "ACAAGATGCC ATTGTCCCCC GGCCTCCTGC TGCTGCTGCT CTCCGGGGCC ACGGCCACCG \n" +
                         "CTGCCCTGCC CCTGGAGGGT GGCCCCACCG GCCGAGACAG CGAGCATATG CAGGAAGCGG \n" +
                         "CAGGAATAAG GAAAAGCAGC CTCCTGACTT TCCTCGCTTG GTGGTTTGAG TGGACCTCCC \n" +
                         "AGGCCAGTGC CGGGCCCCTC ATAGGAGAGG AAGCTCGGGA GGTGGCCAGG CGGCAGGAAG \n" +
