@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static edu.hanalways.cs143.FileUtils.getFile;
+
 public class PlainSequences implements Sequences {
     private final List<String> descriptions;
     private final List<String> sequences;
@@ -47,20 +49,6 @@ public class PlainSequences implements Sequences {
             sequences.add(sequence.toString());
         } catch (Exception e) {
             throw new FileNotFoundException(e.getMessage());
-        }
-    }
-
-    // helper: retrieving given file from resources folder
-    // see: https://mkyong.com/java/java-read-a-file-from-resources-folder/
-    private File getFile(String filename) throws Exception {
-        // explicit check - filename has to start with '/' to look from the root of the resource folder
-        String path = filename.startsWith("/") ? filename : "/" + filename;
-        java.net.URL resource = getClass().getResource(path);
-
-        if (resource == null) {
-            throw new IllegalArgumentException("file not found! Is it in the resources directory?");
-        } else {
-            return new File(resource.getPath());
         }
     }
 
