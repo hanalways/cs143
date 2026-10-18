@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import static edu.hanalways.cs143.FileUtils.getFile;
 import static edu.hanalways.cs143.FileUtils.parseCell;
+import static edu.hanalways.cs143.SudokuBoard.constants.ROW_SUBSET;
 import static edu.hanalways.cs143.SudokuBoard.constants.SUDOKU_SUBSET;
 import static java.lang.String.valueOf;
 
@@ -45,5 +46,34 @@ public class SudokuBoard {
         }
 
         return list;
+    }
+
+    // pre: a valid instance of a SudokuBoard
+    // post: returns a really badly ascii-formatted string representation of the board
+    public String toString() {
+        String horizontalDivider = " -----------------------------------------------\n";
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("============ WELCOME TO CS143 SUDOKU ============\n");
+
+        for (int r = 0; r < SUDOKU_SUBSET; r++) {
+            if (r % ROW_SUBSET == 0) sb.append(horizontalDivider);
+            for (int c = 0; c < SUDOKU_SUBSET; c++) {
+                if (c % ROW_SUBSET == 0) sb.append("|");
+
+                sb.append("[ ");
+                sb.append(formatCell(data[r][c]));
+                sb.append(" ]");
+            }
+            sb.append("|\n");
+        }
+
+        sb.append(horizontalDivider);
+        return sb.toString();
+    }
+
+    // helper: format board data values to string
+    private String formatCell(Integer val) {
+        return (val == null) ? " " : String.valueOf(val);
     }
 }

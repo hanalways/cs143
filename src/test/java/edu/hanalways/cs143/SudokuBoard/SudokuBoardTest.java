@@ -26,4 +26,27 @@ public class SudokuBoardTest {
                 () -> assertEquals(9, boardList.size())
         );
     }
+
+    @Test
+    @DisplayName("the stringified board formats correctly")
+    public void testToString() throws FileNotFoundException {
+        String expected = "============ WELCOME TO CS143 SUDOKU ============\n" +
+                " -----------------------------------------------\n" +
+                "|[ 2 ][   ][   ]|[ 1 ][   ][ 5 ]|[   ][   ][ 3 ]|\n" +
+                "|[   ][ 5 ][ 4 ]|[   ][   ][   ]|[ 7 ][ 1 ][   ]|\n" +
+                "|[   ][ 1 ][   ]|[ 2 ][   ][ 3 ]|[   ][ 8 ][   ]|\n" +
+                " -----------------------------------------------\n" +
+                "|[ 6 ][   ][ 2 ]|[ 8 ][   ][ 7 ]|[ 3 ][   ][ 4 ]|\n" +
+                "|[   ][   ][   ]|[   ][   ][   ]|[   ][   ][   ]|\n" +
+                "|[ 1 ][   ][ 5 ]|[ 3 ][   ][ 9 ]|[ 8 ][   ][ 6 ]|\n" +
+                " -----------------------------------------------\n" +
+                "|[   ][ 2 ][   ]|[ 7 ][   ][ 1 ]|[   ][ 6 ][   ]|\n" +
+                "|[   ][ 8 ][ 1 ]|[   ][   ][   ]|[ 2 ][ 4 ][   ]|\n" +
+                "|[ 7 ][   ][   ]|[ 4 ][   ][ 2 ]|[   ][   ][ 1 ]|\n" +
+                " -----------------------------------------------";
+
+        SudokuBoard board = new SudokuBoard(FILE_NAME);
+
+        assertEquals(expected.trim(), board.toString().trim());
+    }
 }
