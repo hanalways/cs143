@@ -1,6 +1,6 @@
 // Hana Clements
 // CS&143
-// HW: Implement class for manipulating DNA sequence in plain format
+// HW: Use Map to generate frequencies in PlainSequence class
 
 package edu.hanalways.cs143.Sequences;
 
@@ -119,3 +119,16 @@ public class PlainSequences implements Sequences {
         return map;
     }
 }
+
+// > Task :compileJava UP-TO-DATE
+//> Task :processResources UP-TO-DATE
+//> Task :classes UP-TO-DATE
+//> Task :compileTestJava UP-TO-DATE
+//> Task :processTestResources UP-TO-DATE
+//> Task :testClasses UP-TO-DATE
+//> Task :test
+//PlainSequencesTest > generateFrequencies PASSED
+//BUILD SUCCESSFUL in 332ms
+//5 actionable tasks: 1 executed, 4 up-to-date
+//Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.6.0/userguide/configuration_cache_enabling.html
+//3:56:24 PM: Execution finished ':test --tests "edu.hanalways.cs143.Sequences.PlainSequencesTest.generateFrequencies"'.
