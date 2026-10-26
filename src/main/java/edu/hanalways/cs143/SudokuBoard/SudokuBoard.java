@@ -1,3 +1,11 @@
+// Hana Clements
+// CS143
+// HW #2: Sudoku #2 (isValid, isSolved)
+// This program will create a Sudoku board given a seed file
+//      print the board in an ascii format
+//      check if the board is in a valid state
+//      check if the whole board is solved
+
 package edu.hanalways.cs143.SudokuBoard;
 
 import java.io.File;
@@ -185,3 +193,24 @@ public class SudokuBoard implements Sudoku {
         return true;
     }
 }
+
+// 5:35:44 PM: Executing ':edu.hanalways.cs143.SudokuBoard.SudokuCheckerEngineV2.main()'…
+//
+//> Task :compileJava
+//> Task :processResources UP-TO-DATE
+//> Task :classes
+//
+//> Task :edu.hanalways.cs143.SudokuBoard.SudokuCheckerEngineV2.main()
+//Checking empty board...passed.
+//Checking incomplete, valid board...passed.
+//Checking complete, valid board...passed.
+//Checking dirty data board...failed.
+//Checking row violating board...passed.
+//Checking col violating board...passed.
+//Checking row&col violating board...passed.
+//Checking mini-square violating board...passed.
+//
+//BUILD SUCCESSFUL in 97ms
+//3 actionable tasks: 2 executed, 1 up-to-date
+//Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.6.0/userguide/configuration_cache_enabling.html
+//5:35:44 PM: Execution finished ':edu.hanalways.cs143.SudokuBoard.SudokuCheckerEngineV2.main()'.
