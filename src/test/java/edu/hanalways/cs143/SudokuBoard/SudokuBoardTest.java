@@ -96,4 +96,18 @@ public class SudokuBoardTest {
 
         assertTrue(board.isValidMinisquare());
     }
+
+    @Test
+    public void testIsSolved() throws FileNotFoundException {
+        SudokuBoard board = new SudokuBoard(SUDOKU_ROOT + "mock-valid-board.sdk");
+
+        assertTrue(board.isSolved());
+    }
+
+    @Test
+    public void testIsSolvedReturnsFalse() throws FileNotFoundException {
+        SudokuBoard board = new SudokuBoard(SUDOKU_ROOT + "data1-1-1.sdk");
+
+        assertFalse(board.isSolved());
+    }
 }

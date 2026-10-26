@@ -164,9 +164,24 @@ public class SudokuBoard implements Sudoku {
         return true;
     }
 
-    // HLC PART 2
-//    public boolean isSolved() {
-//        // use a map where key is 0-9, value is how many times found
-//        return false;
-//    }
+    // pre: instantiated, seeded SudokuBoard
+    // post: boolean check to determine if the entire board is solved based on the isValid ruleset
+    //      and no cells are null
+    public boolean isSolved() {
+        // must be valid layout
+        if (!isValid()) {
+            return false;
+        }
+
+        // must be completely filled (no nulls)
+        for (int r = 0; r < SUDOKU_SUBSET; r++) { // totes forgot about the const for 9, too lazy to go back and update isValid
+            for (int c =0; c < SUDOKU_SUBSET; c++) {
+                if (data[r][c] == null) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
 }
