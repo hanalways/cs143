@@ -3,6 +3,10 @@ package edu.hanalways.cs143;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import static java.lang.Character.getNumericValue;
+import static java.lang.Integer.parseInt;
+import static java.lang.String.valueOf;
+
 public class FileUtils {
     // helper: retrieving given file from resources folder
     // see: https://mkyong.com/java/java-read-a-file-from-resources-folder/
@@ -18,5 +22,14 @@ public class FileUtils {
         } else {
             return new File(resource.getPath());
         }
+    }
+
+    // helper: parse file contents into board data
+    public static Integer parseCell(char cell) {
+        if (cell == '.') {
+            return null;
+        }
+
+        return getNumericValue(cell);
     }
 }
