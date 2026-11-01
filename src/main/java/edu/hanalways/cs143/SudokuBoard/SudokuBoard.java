@@ -1,10 +1,11 @@
 // Hana Clements
 // CS143
-// HW #2: Sudoku #2 (isValid, isSolved)
+// HW #3: Sudoku #3 (solve)
 // This program will create a Sudoku board given a seed file
 //      print the board in an ascii format
 //      check if the board is in a valid state
 //      check if the whole board is solved
+//      solve a board that was seeded validly
 
 package edu.hanalways.cs143.SudokuBoard;
 
@@ -192,25 +193,82 @@ public class SudokuBoard implements Sudoku {
 
         return true;
     }
+
+    // pre: an instantiated SudokuBoard
+    // post: recursive backtrack attempt to solve the given SudokuBoard
+    //      returns true if the board is solved, false if it cannot be solved
+    public boolean solve() {
+        boolean boardSolved = false;
+
+        if (!isValid()) {
+            return false;
+        } else if (isSolved()) {
+            return true;
+        } else {
+            for (int r = 0; r < SUDOKU_SUBSET; r++) {
+                for (int c = 0; c < SUDOKU_SUBSET; c++) {
+                    if (data[r][c] == null) {
+                        // found an empty row start trying all digits 1-9 to see if any lead to a solution
+                        for (int val = 1; val <= SUDOKU_SUBSET && !boardSolved; val++) {
+                            data[r][c] = val;
+                            boardSolved = solve();
+                        }
+                        if (!boardSolved) {
+                            data[r][c] = null;
+                        }
+                    }
+                }
+            }
+        }
+
+        return boardSolved;
+    }
 }
 
-// 5:35:44 PM: Executing ':edu.hanalways.cs143.SudokuBoard.SudokuCheckerEngineV2.main()'…
+//3:29:00 PM: Executing ':edu.hanalways.cs143.SudokuBoard.SudokuSolverEngineRecursion.main()'…
 //
 //> Task :compileJava
 //> Task :processResources UP-TO-DATE
 //> Task :classes
 //
-//> Task :edu.hanalways.cs143.SudokuBoard.SudokuCheckerEngineV2.main()
-//Checking empty board...passed.
-//Checking incomplete, valid board...passed.
-//Checking complete, valid board...passed.
-//Checking dirty data board...failed.
-//Checking row violating board...passed.
-//Checking col violating board...passed.
-//Checking row&col violating board...passed.
-//Checking mini-square violating board...passed.
+//> Task :edu.hanalways.cs143.SudokuBoard.SudokuSolverEngineRecursion.main()
+//Initial board
+//============ WELCOME TO CS143 SUDOKU ============
+// -----------------------------------------------
+//|[   ][ 3 ][ 4 ]|[ 6 ][ 7 ][ 8 ]|[ 9 ][ 1 ][ 2 ]|
+//|[   ][ 7 ][ 2 ]|[ 1 ][ 9 ][ 5 ]|[ 3 ][ 4 ][ 8 ]|
+//|[ 1 ][ 9 ][ 8 ]|[ 3 ][ 4 ][ 2 ]|[ 5 ][ 6 ][ 7 ]|
+// -----------------------------------------------
+//|[   ][   ][ 9 ]|[   ][ 6 ][ 1 ]|[ 4 ][ 2 ][ 3 ]|
+//|[   ][ 2 ][ 6 ]|[ 8 ][ 5 ][ 3 ]|[ 7 ][ 9 ][ 1 ]|
+//|[   ][ 1 ][ 3 ]|[ 9 ][ 2 ][ 4 ]|[   ][ 5 ][ 6 ]|
+// -----------------------------------------------
+//|[   ][ 6 ][ 1 ]|[ 5 ][ 3 ][ 7 ]|[ 2 ][ 8 ][ 4 ]|
+//|[   ][ 8 ][   ]|[ 4 ][ 1 ][ 9 ]|[ 6 ][ 3 ][ 5 ]|
+//|[ 3 ][ 4 ][ 5 ]|[   ][ 8 ][ 6 ]|[ 1 ][ 7 ][ 9 ]|
+// -----------------------------------------------
 //
-//BUILD SUCCESSFUL in 97ms
+//
+//Solving board...SOLVED in 0.551 seconds.
+//
+//============ WELCOME TO CS143 SUDOKU ============
+// -----------------------------------------------
+//|[ 5 ][ 3 ][ 4 ]|[ 6 ][ 7 ][ 8 ]|[ 9 ][ 1 ][ 2 ]|
+//|[ 6 ][ 7 ][ 2 ]|[ 1 ][ 9 ][ 5 ]|[ 3 ][ 4 ][ 8 ]|
+//|[ 1 ][ 9 ][ 8 ]|[ 3 ][ 4 ][ 2 ]|[ 5 ][ 6 ][ 7 ]|
+// -----------------------------------------------
+//|[ 8 ][ 5 ][ 9 ]|[ 7 ][ 6 ][ 1 ]|[ 4 ][ 2 ][ 3 ]|
+//|[ 4 ][ 2 ][ 6 ]|[ 8 ][ 5 ][ 3 ]|[ 7 ][ 9 ][ 1 ]|
+//|[ 7 ][ 1 ][ 3 ]|[ 9 ][ 2 ][ 4 ]|[ 8 ][ 5 ][ 6 ]|
+// -----------------------------------------------
+//|[ 9 ][ 6 ][ 1 ]|[ 5 ][ 3 ][ 7 ]|[ 2 ][ 8 ][ 4 ]|
+//|[ 2 ][ 8 ][ 7 ]|[ 4 ][ 1 ][ 9 ]|[ 6 ][ 3 ][ 5 ]|
+//|[ 3 ][ 4 ][ 5 ]|[ 2 ][ 8 ][ 6 ]|[ 1 ][ 7 ][ 9 ]|
+// -----------------------------------------------
+//
+//false
+//
+//BUILD SUCCESSFUL in 657ms
 //3 actionable tasks: 2 executed, 1 up-to-date
 //Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.6.0/userguide/configuration_cache_enabling.html
-//5:35:44 PM: Execution finished ':edu.hanalways.cs143.SudokuBoard.SudokuCheckerEngineV2.main()'.
+//3:29:00 PM: Execution finished ':edu.hanalways.cs143.SudokuBoard.SudokuSolverEngineRecursion.main()'.
