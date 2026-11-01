@@ -225,13 +225,17 @@ public class SudokuBoard implements Sudoku {
     }
 }
 
-//3:29:00 PM: Executing ':edu.hanalways.cs143.SudokuBoard.SudokuSolverEngineRecursion.main()'…
+//3:36:34 PM: Executing ':edu.hanalways.cs143.SudokuBoard.SudokuSolverEngineRecursion.main()'…
 //
 //> Task :compileJava
 //> Task :processResources UP-TO-DATE
 //> Task :classes
 //
 //> Task :edu.hanalways.cs143.SudokuBoard.SudokuSolverEngineRecursion.main()
+//Verifying behavior of an invalid board
+//Can this board be solved?: false
+//Verifying behavior of a pre-solved board
+//Is this board already solved?: true
 //Initial board
 //============ WELCOME TO CS143 SUDOKU ============
 // -----------------------------------------------
@@ -249,7 +253,7 @@ public class SudokuBoard implements Sudoku {
 // -----------------------------------------------
 //
 //
-//Solving board...SOLVED in 0.551 seconds.
+//Solving board...SOLVED in 0.549 seconds.
 //
 //============ WELCOME TO CS143 SUDOKU ============
 // -----------------------------------------------
@@ -266,9 +270,8 @@ public class SudokuBoard implements Sudoku {
 //|[ 3 ][ 4 ][ 5 ]|[ 2 ][ 8 ][ 6 ]|[ 1 ][ 7 ][ 9 ]|
 // -----------------------------------------------
 //
-//false
 //
-//BUILD SUCCESSFUL in 657ms
+//BUILD SUCCESSFUL in 685ms
 //3 actionable tasks: 2 executed, 1 up-to-date
 //Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.6.0/userguide/configuration_cache_enabling.html
-//3:29:00 PM: Execution finished ':edu.hanalways.cs143.SudokuBoard.SudokuSolverEngineRecursion.main()'.
+//3:36:35 PM: Execution finished ':edu.hanalways.cs143.SudokuBoard.SudokuSolverEngineRecursion.main()'.
