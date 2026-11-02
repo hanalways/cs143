@@ -1,14 +1,12 @@
 // Hana Clements
 // CS&143
-// HW: Implement class for manipulating DNA sequence in plain format
+// HW: Use Map to generate frequencies in PlainSequence class
 
 package edu.hanalways.cs143.Sequences;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import static edu.hanalways.cs143.FileUtils.getFile;
 
@@ -98,8 +96,39 @@ public class PlainSequences implements Sequences {
             }
         }
 
-        System.out.println(formatted.toString());
+        System.out.println(formatted);
 
         return formatted.toString();
     }
+
+    // pre: an instance of PlainSequences that has already been given a seed of sequences via readSequences()
+    // post: given an index to locate the exact sequence
+    //      returns a map of string, integer pairs where each string is a substring of the given sequence
+    //      and the integer is the frequency that the substring appears.
+    public Map<String, Integer> generateFrequencies(int index) {
+        Map<String, Integer> map = new HashMap<>();
+        String sequence = sequences.get(index);
+
+        for (int i = 0; i < sequence.length(); i++) {
+            for (int j = i + 1; j <= sequence.length(); j++) {
+                String substring = sequence.substring(i, j);
+                map.put(substring, map.getOrDefault(substring, 0) + 1);
+            }
+        }
+
+        return map;
+    }
 }
+
+// > Task :compileJava UP-TO-DATE
+//> Task :processResources UP-TO-DATE
+//> Task :classes UP-TO-DATE
+//> Task :compileTestJava UP-TO-DATE
+//> Task :processTestResources UP-TO-DATE
+//> Task :testClasses UP-TO-DATE
+//> Task :test
+//PlainSequencesTest > generateFrequencies PASSED
+//BUILD SUCCESSFUL in 332ms
+//5 actionable tasks: 1 executed, 4 up-to-date
+//Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.6.0/userguide/configuration_cache_enabling.html
+//3:56:24 PM: Execution finished ':test --tests "edu.hanalways.cs143.Sequences.PlainSequencesTest.generateFrequencies"'.
