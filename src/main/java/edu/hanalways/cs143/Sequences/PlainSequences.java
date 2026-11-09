@@ -1,14 +1,12 @@
 // Hana Clements
 // CS&143
-// HW: Implement class for manipulating DNA sequence in plain format
+// HW: Week 7 Use Stacks and Queues to compute the reverse complement of a dna sequence
 
 package edu.hanalways.cs143.Sequences;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import static edu.hanalways.cs143.FileUtils.getFile;
 
@@ -102,4 +100,75 @@ public class PlainSequences implements Sequences {
 
         return formatted.toString();
     }
+
+    public Map<String, Integer> generateFrequencies(int index) {
+        return Map.of();
+    }
+
+    public List<String> getSortedListOfSubstrings(int index) {
+        return List.of();
+    }
+
+    public String getReverseComplement(int index) {
+        String originalSequence = sequences.get(index);
+
+        // take all the characters from the original sequence string
+        // place them one at a time into a queue
+        Queue<Character> q = new LinkedList<>();
+        for (int i = 0; i < originalSequence.length(); i++) {
+            // adding each char to the queue
+            q.add(originalSequence.charAt(i));
+        }
+
+        // iterate thru the q and remove one char at a time
+        // add it to our stack
+        Stack<Character> s = new Stack<>();
+        while (!q.isEmpty()) {
+            Character c = q.remove();
+            s.push(c);
+        }
+
+        // pop each char off of the stack
+        // make the 'complement' swap
+        // i.e. A -> T, T -> A, G -> C, C -> G and build up a file string
+        StringBuilder sb = new StringBuilder();
+        while (!s.isEmpty()) {
+            Character c = s.pop();
+
+            // change the char into its complement
+            switch (c) {
+                case 'a':
+                case 'A':
+                    sb.append('T');
+                    break;
+                case 't':
+                case 'T':
+                    sb.append('A');
+                    break;
+                case 'g':
+                case 'G':
+                    sb.append('C');
+                    break;
+                case 'c':
+                case 'C':
+                    sb.append('G');
+                    break;
+            }
+        }
+
+        return sb.toString();
+    }
 }
+
+//> Task :compileJava UP-TO-DATE
+//> Task :processResources
+//> Task :classes
+//> Task :compileTestJava UP-TO-DATE
+//> Task :processTestResources UP-TO-DATE
+//> Task :testClasses UP-TO-DATE
+//> Task :test
+//PlainSequencesTest > testGetReverseComplement PASSED
+//BUILD SUCCESSFUL in 312ms
+//5 actionable tasks: 2 executed, 3 up-to-date
+//Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.6.0/userguide/configuration_cache_enabling.html
+//7:21:06 PM: Execution finished ':test --tests "edu.hanalways.cs143.Sequences.PlainSequencesTest.testGetReverseComplement"'.
